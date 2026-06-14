@@ -1,50 +1,38 @@
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
-const FeatureList = [
+const CategoryList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
+    title: '高等数学',
+    tag: '4 个 PDF',
+    href: '/docs/advanced-math',
+    description: '积分学、级数与高研班作业资料先放在这里，后续可以继续补充章节笔记。',
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
+    title: '无机化学',
+    tag: '待整理',
+    href: '/docs/inorganic-chemistry',
+    description: '用于沉淀反应、配位化学、元素化学等知识块的长期整理。',
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
+    title: '物理化学',
+    tag: '待整理',
+    href: '/docs/physical-chemistry',
+    description: '用于热力学、电化学、动力学等内容归档，方便和数学工具相互连接。',
   },
 ];
 
-function Feature({Svg, title, description}) {
+function CategoryCard({title, tag, href, description}) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
+    <div className={clsx('col col--4', styles.categoryColumn)}>
+      <Link className={styles.categoryCard} to={href}>
+        <span className={styles.cardTag}>{tag}</span>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
-      </div>
+        <span className={styles.cardAction}>打开目录</span>
+      </Link>
     </div>
   );
 }
@@ -53,9 +41,13 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
+        <div className={styles.sectionHeader}>
+          <Heading as="h2">学习目录</Heading>
+          <p>先从三个核心板块开始，把资料、练习和复盘逐步连接成自己的知识网络。</p>
+        </div>
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {CategoryList.map((props) => (
+            <CategoryCard key={props.title} {...props} />
           ))}
         </div>
       </div>
